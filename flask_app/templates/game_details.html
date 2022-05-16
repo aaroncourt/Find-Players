@@ -1,0 +1,65 @@
+{% extends "webpage_template.html" %}
+    {% block body %}        
+    <!-- page container -->
+    <div class="flex mt-5">
+        <!-- details container -->
+        <div class="flex flex-col justify-center bg-white/75 rounded relative">
+            
+            <h1 class="text-3xl text-center font-bold my-5">Game Details</h1>
+
+            <img src="{{ game_info.image_url }}" alt="picture of {{ game_info.name }}" class="max-h-80 max-w-xs place-self-center ">
+            
+            <!-- actions container -->
+            <div class="space-y-3 mx-5 absolute top-[76px] right-[10px] ">
+                <!-- favorite/unfavorite button -->
+                {% if is_favorite %}
+                <form action="/game_detail/remove_favorite_game/{{game_info.id}}" method="post">
+                    <input type="hidden" name="atlas_game_id" value="{{game_info.id}}">
+                    <input type="hidden" name="atlas_game_name" value="{{game_info.name}}">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28 ">Unfavorite</button>
+                </form>
+                {% else %}
+                <form action="/add_favorite_game/{{game_info.id}}" method="post">
+                    <input type="hidden" name="atlas_game_id" value="{{game_info.id}}">
+                    <input type="hidden" name="atlas_game_name" value="{{game_info.name}}">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28 ">Favorite</button>
+                </form>
+                {% endif %}
+
+                <!-- own/disown button -->
+                {% if is_owned %}
+                <form action="/game_detail/remove_owned_game/{{game_info.id}}" method="post">
+                    <input type="hidden" name="atlas_game_id" value="{{game_info.id}}">
+                    <input type="hidden" name="atlas_game_name" value="{{game_info.name}}">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28" type="submit">Don't Own</button>
+                </form>
+                {% else %}
+                <form action="/add_owned_game/{{game_info.id}}" method="post">
+                    <input type="hidden" name="atlas_game_id" value="{{game_info.id}}">
+                    <input type="hidden" name="atlas_game_name" value="{{game_info.name}}">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28" type="submit">Own</button>                
+                </form>
+                {% endif %}    
+            </div>
+            <!-- end of actions container -->
+
+            <h3 class="text-2xl font-bold text-center mt-5">{{ game_info.name }}</h3>
+
+            <div class="flex px-10 mb-10">
+                <div class="font-semibold basis-1/4">
+                    <h5 class="text-lg">Number of Players</h5>
+                    <p class="text-base mb-5">{{ game_info.min_players }} to {{ game_info.max_players }}</p>
+
+                    <h5 class="text-lg">Playtime</h5>
+                    <p class="text-base">{{ game_info.min_playtime}} to {{ game_info.max_playtime }}</p>
+                </div>
+                
+                <div class="font-semibold basis-3/4 text-justify">
+                    <h5 class="text-lg">Description</h5>
+                    <p class="text-base">{{ game_info.description_preview }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of page container -->
+    {% endblock %}

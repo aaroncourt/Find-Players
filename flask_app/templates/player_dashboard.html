@@ -1,0 +1,98 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- dashboard container -->
+    <div class="mx-auto p-10 bg-white/75 rounded">
+        <!-- dashboard header -->
+        <div class="relative">
+            <div class="text-center text-2xl">
+                <h2 class="font-bold mb-10">{{ session['nickname'] }}'s dashboard</h2>
+            </div>
+
+            <div class="absolute top-0 right-0 underline">
+                <a href="/player/edit/{{session['user_id'] }}">Edit Profile</a>
+            </div>
+        </div>
+        <!-- end of dashboard header -->
+
+        <!-- dashboard body -->
+        <div class="flex justify-evenly">
+            <!-- games container -->
+            <div class="flex flex-col gap-5">
+                <!-- favorite games -->
+                <div>
+                    <h5 class="text-xl text-bold text-center">Favorite Games</h5>
+                    <table class="text-semibold mt-2.5 mb-5">
+                        <tr class="border-b-2 border-green-600">
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+
+                        {% for game in favorite_games %}
+                        <tr class="border-b-2 border-green-600 align-middle font-semibold py-2 my-2" >
+                            <td class="underline w-auto md:w-48 text-center"><a href="/game/{{game.atlas_game_id}}">{{ game.atlas_game_name }}</a></td>
+                                <td>
+                                    <form action="/dashboard/remove_favorite_game/{{game.atlas_game_id}}" method="post">
+                                        <input type="hidden" name="atlas_game_id" value="{{game.atlas_game_id}}">
+                                        <input type="hidden" name="atlas_game_name" value="{{game.atlas_game_name}}">
+                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Unfavorite</button>                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <!-- owned games -->
+                <div>
+                    <h5 class="text-xl text-bold text-center">Owned Games</h5>
+                    <table class="text-semibold mt-2.5 mb-5">
+                        <tr class="border-b-2 border-green-600">
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                        
+                        {% for game in owned_games %}
+                        <tr class="border-b-2 border-green-600 align-middle font-semibold py-2 my-2" >
+                            <td class="underline w-auto md:w-48 text-center"><a href="/game/{{game.atlas_game_id}}">{{ game.atlas_game_name }}</a></td>
+                                <td>
+                                    <form action="/dashboard/remove_owned_game/{{game.atlas_game_id}}" method="post">
+                                        <input type="hidden" name="atlas_game_id" value="{{game.atlas_game_id}}">
+                                        <input type="hidden" name="atlas_game_name" value="{{game.atlas_game_name}}">
+                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Don't Own</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <!-- end of games container -->
+
+            <!-- favorite users container -->
+            <div>
+                <h5 class="text-xl text-bold text-center">Favorite Players</h5>
+                <table class="text-semibold mt-2.5 mb-5">
+                    <tr class="border-b-2 border-green-600">
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                    
+                    {% for user in favorite_users %}
+                    <tr class="border-b-2 border-green-600 align-middle font-semibold py-2 my-2" >
+                        <td class="underline w-auto md:w-48 text-center"><a href="/player/{{user.favorite_id}}">{{ user.favorite_nickname }}</a></td>
+                            <td>
+                                <form action="/dashboard/remove_favorite_user/{{user.favorite_id}}" method="post">
+                                    <input type="hidden" name="favorite_id" value="{{user.favorite_id}}">
+                                    <input type="hidden" name="favorite_name" value="{{user.favorite_name}}">
+                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Unfavorite</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- end of favorite users container -->
+        </div>
+        <!-- end of dashboard body -->
+    </div>
+    <!-- end of dashboard container -->
+    {% endblock %}

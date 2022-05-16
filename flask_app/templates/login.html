@@ -1,0 +1,50 @@
+{% extends 'webpage_template.html' %}
+    {% block body %}
+    <!-- form container  -->
+    <div class="mx-auto w-full max-w-xs">
+        <form action="/login" method="post" class="grid gap-4 bg-white/75 shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post">
+
+            <h3 class="text-xl text-center font-bold">Login to Find Players!</h3>
+
+            <!-- username -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="user_email">
+                Username
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="user_email" name="user_email" type="text" placeholder="Username">
+            </div>
+
+            <!-- password -->
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="user_password">
+                Password
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="user_password" name="user_password" type="password" placeholder="******************">
+            </div>
+
+            <!-- sign-in/forgot pass container-->
+            <div class="flex items-center justify-between">
+                <button class="mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Sign In
+                </button>
+
+                <!-- forgot password link -->
+                <!-- <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                Forgot Password?
+                </a> -->
+
+            </div>
+        </form>
+    </div>
+    <!-- end of form container -->
+
+    <!-- error messages -->
+    <div class="text-red-600">
+        {% with login = get_flashed_messages(category_filter=['login']) %}
+            {% if login %}
+                    <p>{{ login[0] }}</p>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% endblock %}

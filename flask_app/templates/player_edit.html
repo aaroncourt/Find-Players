@@ -1,0 +1,94 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- styling of form components retreived from Tailwind website @ https://v1.tailwindcss.com/components/forms with some small alterations -->
+    <div class="mx-auto w-full max-w-md">
+
+        <!-- form container -->
+        <form action="/submit_player_edit/{{user_info.id}}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+            <h3 class="text-xl text-center font-bold">Edit {{user_info.nickname}}'s Profile</h3>
+
+            <!-- hidden id -->
+            <input type="text" class="hidden" id="id" name="user_id" value="{{ user_info.id }}">
+            
+            <!-- name -->
+            <div> 
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                <input required type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" value="{{ user_info.name }}">
+            </div>
+
+            <!-- email -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="user_email">Email</label>
+                <input required type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="user_email" name="user_email" value="{{ user_info.email }}">
+            </div>
+
+            <!-- nickname -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nickname">Nickname</label>
+                <input required type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nickname" name="nickname" value="{{ user_info.nickname }}">
+            </div>
+
+            <!-- ZIP code -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="zip_code">ZIP Code</label>
+                <input required type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="zip_code" name="zip_code" value="{{ user_info.zip_code }}">
+            </div>
+
+            <!-- favorite game -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="favorite_game">Favorite game of all time?</label>
+                <input required type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="favorite_game" name="favorite_game" value="{{ user_info.favorite_game }}">
+            </div>
+
+            <!-- play_preference -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="play_preference">Preferred way to play?</label>
+
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+            </div>
+
+            <div class="inline-block relative w-64">
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="play_preference" name="play_preference">
+                    {% if user_info.play_preference == 'In-person' %}
+                        <option value="In-person" selected >In-person</option>
+                        <option value="Online">Online</option>
+                        <option value="Both in-person & online">Both in-person & online</option>
+                    {% elif user_info.play_preference == 'Online' %}
+                        <option value="In-person" >In-person</option>
+                        <option value="Online" selected>Online</option>
+                        <option value="Both in-person & online">Both in-person & online</option>
+                    {% elif user_info.play_preference == 'Both in-person & online' %}
+                        <option value="In-person">In-person</option>
+                        <option value="Online">Online</option>
+                        <option value="Both in-person & online" selected>Both in-person & online</option>
+                    {% else %}
+                        <option value="none" selected>Please select</option>
+                        <option value="In-person">In-person</option>
+                        <option value="Online">Online</option>
+                        <option value="Both in-person & online">Both in-person & online</option>
+                    {% endif %}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 h-10">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+
+                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"type="submit" value="SUBMIT">
+            </div>
+        </form>
+        <!-- end of form container -->
+    </div>
+
+    <!-- error messages conttainer -->
+    <div class="text-red-600 text-center">
+        {% with messages = get_flashed_messages(category_filter=["registration", "update"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    {% endblock %}

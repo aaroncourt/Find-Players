@@ -1,0 +1,44 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- page container -->
+    <div class="flex mt-5">
+        <!-- details container -->
+        <div class="flex flex-col justify-center bg-white/75 rounded relative w-auto md:w-full px-20 py-10">
+            <h1 class="text-3xl text-center font-bold my-5">{{ user_info.nickname }}</h1>
+            <!-- favorite/unfavorite button -->
+            <div class="mx-5 absolute top-[76px] right-[10px]">
+                {% if is_favorite %}
+                <form action="/player_details/remove_favorite_user/{{user_info.id}}" method="post">
+                    <input type="hidden" name="favorite_user_id" value="{{user_info.id}}">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28 ">Unfavorite</button>
+                </form>
+                {% else %}
+                <form action="/add_favorite_user/{{user_info.id}}" method="post">
+                    <input type="hidden" name="favorite_user_id" value="{{user_info.id}}">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded m-auto md:w-28 ">Favorite</button>
+                </form>
+                {% endif %}
+            </div>
+
+            <!-- player details -->
+            <div class="space-y-3">
+                <div class="font-semibold">
+                    <h5 class="text-lg">Where they live:</h5>
+                    <p class="text-base">{{ user_info.city }}</p>
+                </div>
+
+                <div class="font-semibold">
+                    <h5 class="text-lg">Preferred setting to play in:</h5>
+                    <p class="text-base">{{ user_info.play_preference }}</p>
+                </div>
+
+                <div class="font-semibold">
+                    <h5 class="text-lg">Favorite Game:</h5>
+                    <p class="text-base">{{ user_info.favorite_game}}</p>
+                </div>
+            </div>
+            <!-- end of player details -->
+        </div>
+        <!-- end of details container -->
+    </div>
+    {% endblock %}

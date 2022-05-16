@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=line-clamp"></script>
+    <title>Find Players</title>
+</head>
+<body background="/static/img/background1.png"  class="bg-cover bg-no-repeat bg-fixed text-emerald-800 pb-20" >
+
+    <!-- page container -->
+    <div class="container m-auto max-w-4xl relative">
+        <!-- search popups -->
+        <div>
+            <div id="search_games" class="hidden justify-center items-center rounded-lg text-white left-32 bg-emerald-700 w-80 h-14 absolute">
+                <form action="/game_search" method="post" class="flex gap-x-3">
+                    <input class="rounded-lg text-black w-48 indent-2" type="text" placeholder="Search for a game" name="search_term" required>
+                    <button type="submit" class="bg-green-500 hover:bg-green-300 rounded-lg  border-white border-2 p-1">Search</button>
+                    <img src="/static/img/red_x_close_button.png" alt="close button" class="h-5 w-5 mt-1.5 cursor-pointer" onclick="hideSearch('search_games')">
+                </form>
+            </div>
+        
+            <div id="search_players" class="hidden justify-center items-center rounded-lg text-white inset-x-96 top-0 bg-emerald-700 w-80 h-14 absolute">
+                <form action="/player_search" method="post" class="flex gap-x-3">
+                    <input class="rounded-lg text-black w-48 indent-2" type="text" placeholder="Search by zip code" name="search_term" required> 
+                    <button type="submit" class="bg-green-500 hover:bg-green-300 rounded-lg border-white border-2 p-1">Search</button>
+                    <img src="/static/img/red_x_close_button.png" alt="close button" class="h-5 w-5 mt-1.5 cursor-pointer" onclick="hideSearch('search_players')">
+                </form>
+            </div>
+        </div>
+        <!-- end of search popups -->
+        
+        <!-- header  -->
+        <div class="grid grid-cols-3 grid-flow-row my-10">
+            <h1 class="text-2xl font-bold">Find Players</h1>
+            <!-- link bar -->
+            <div class="flex justify-center gap-x-2">
+                <p class="cursor-pointer text-lg font-bold " onclick="showSearch('search_games')" >Find Games</p>
+                <p> | </p>
+                <a href="/home" class="text-lg font-bold">Home</a>
+                <p> | </p>
+                <p class="cursor-pointer text-lg font-bold" onclick="showSearch('search_players')">Find Players</p>
+            </div>
+
+            {% if session['user_id'] %}
+                <div class="flex space-x-2 justify-end">
+                    <a href="/dashboard" class="text-lg font-bold">My Dashboard</a>
+                    <p> | </p>
+                    <a href="/logout" class="text-lg font-bold">Logout</a>
+                </div>
+            {% else %}
+                <div class="flex space-x-2 justify-end">
+                    <a href="/login" class="text-lg font-bold">Login</a>
+                    <p> | </p>
+                    <a href="/newplayer" class="text-lg font-bold">Signup</a>
+                </div>
+            {% endif %}
+        </div>
+        <!-- end of header -->
+
+        <div class="h-2 bg-green-600 mb-10"></div>
+    {% block body %}
+
+    {% endblock %}
+    </div>
+    <!-- end of page container -->
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- search results  -->
+    <div class="grid justify-center mx-auto p-3 bg-white/75 rounded">
+        <div class="text-center grid gap-3 mb-3">
+            <h3 class="text-xl font-bold">Player Search Results</h3>
+            <h5 class="text-lg font-semibold">Players within 10 miles of Zip Code: {{search_term}}</h5>
+        </div>
+
+        <!-- results table -->
+        <table class="m-3 p-2.5 w-fit ">
+            <tr class="border-b-2 border-green-600">
+                <th>Name</th>
+                <th>Favorite Game</th>
+                <th>Actions</th>
+            </tr>
+            {% for player in search_results %}
+            <tr class="border-b-2 border-green-600 align-middle font-semibold" >
+                <!-- player name -->
+                <td class="cursor-pointer text-center m-2 underline" onclick="location.href='/player/{{player.id}}'">{{ player.nickname }}</td>
+
+                <!-- player favorite games -->
+                <td class="line-clamp-4 text-justify w-auto md:w-fit px-5 pt-7">{{ player.favorite_game }}</td>
+                
+                <!-- player actions -->
+                <td class="space-y-3 py-5">
+
+                    <!-- favorite/unfavorite button -->
+                    {% if is_favorite %}
+                    <form action="#" class="flex flex-col justify-center">
+                        <!-- "/results/{{search_term}}/add_favorite_user/{{player.id}}" -->
+                        <input type="hidden" name="user_id" value="{{player.id}}">
+                        <input type="hidden" name="player_name" value="{{player.name}}">
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Unfavorite</button>
+                    </form>
+                    {% else %}
+                    <form action="" class="flex flex-col justify-center">
+                        <!-- "/add_favorite_user/{{player.id}}" -->
+                        <input type="hidden" name="user_id" value="{{player.id}}">
+                        <input type="hidden" name="player_name" value="{{player.name}}">
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Favorite</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!-- end of results table -->
+    </div>
+    <!-- end of search results -->
+    {% endblock %}

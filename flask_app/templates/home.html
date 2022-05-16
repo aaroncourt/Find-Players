@@ -1,0 +1,55 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- error messages -->
+        <div class="text-red-600 text-xl font-bold text-center">
+            {% with denied = get_flashed_messages(category_filter=['denied']) %}
+                {% if denied %}
+                        <p>{{ denied[0] }}</p>
+                {% endif %}
+            {% endwith %}
+        </div>
+    <!-- end of error messages -->
+
+    <!-- body container -->
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold">Welcome to Find Players</h1>
+        <p class="mt-5 font-semibold">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo in vitae. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. A scelerisque purus semper eget duis at tellus at. Purus gravida quis blandit turpis cursus in hac. Interdum varius sit amet mattis vulputate. Non curabitur gravida arcu ac tortor dignissim convallis aenean et. Faucibus interdum posuere lorem ipsum dolor. Sed euismod nisi porta lorem. Neque vitae tempus quam pellentesque nec nam aliquam sem. Curabitur vitae nunc sed velit dignissim sodales. Consectetur adipiscing elit ut aliquam purus sit amet luctus. Lacus vestibulum sed arcu non odio euismod.
+        </p>
+    </div>
+
+    <!-- boardgame container -->
+    <div class="flex justify-between">
+        <!-- featured container-->
+        <div class="flex flex-col content-start justify-center max-w-sm bg-white/75 rounded p-5 cursor-pointer" onclick="location.href='/game/{{featured.id}}'">
+            <div >
+                <img src="{{ featured.image_url }}" alt="picture of {{ featured.name }}" width="max-w-xs" height="max-h-64">
+            </div>
+            
+            <!-- featured name and description container -->
+            <div class="font-semibold ">
+                
+                <p class="text-xl text-center my-3 ">{{ featured.name }}</p>
+                
+                <p class="line-clamp-6">{{ featured.description_preview }}</p>
+
+            </div>
+        </div>
+        <!-- end of featured container -->
+
+        <!-- random game container-->
+        <div class="flex flex-col content-start justify-center max-w-sm bg-white/75 rounded p-5 cursor-pointer" onclick="location.href='/game/{{random.id}}'">
+            <div>
+                <img src="{{ random.image_url }}" alt="picture of {{ random.name }}" width="max-w-xs" height="max-h-64">
+            </div>
+
+            <div class="font-semibold">
+                <p class="text-xl text-center my-3 font-semibold" >{{ random.name }}</p>
+
+                <p class="line-clamp-6">{{ random.description_preview }}</p>
+            </div>
+        </div>
+        <!-- end of random container -->
+    </div>
+    <!-- end of boardgame container -->
+    {% endblock %}

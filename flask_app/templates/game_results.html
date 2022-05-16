@@ -1,0 +1,73 @@
+{% extends "webpage_template.html" %}
+    {% block body %}
+    <!-- search results  -->
+    <div class="mx-auto p-3 bg-white/75 rounded">
+        <div class="text-center grid gap-3 mb-3">
+            <h3 class="text-xl font-bold">Game Search Results</h3>
+            <h5 class="text-lg font-semibold">Games with names similar to: "{{search_term}}"</h5>
+        </div>
+
+        <!-- results table -->
+        <table class="m-3 p-2.5">
+            <tr class="border-b-2 border-green-600">
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            {% for game in search_results %}
+            <tr class="border-b-2 border-green-600 align-middle font-semibold" >
+                <!-- game thumb -->
+                <td><img src="{{ game.thumb_url }}" alt="picture of {{ game.name }}" class="max-h-24 cursor-pointer mx-auto" onclick="location.href='/game/{{game.id}}'"></td>
+
+                <!-- game name -->
+                <td class="cursor-pointer text-center m-2 underline" onclick="location.href='/game/{{game.id}}'">{{ game.name }}</td>
+
+                <!-- game description -->
+                <td class="line-clamp-4 text-justify px-5 pt-5">{{ game.description_preview }}</td>
+                
+                <!-- game actions -->
+                <td class="space-y-3 py-5">
+
+                    <!-- favorite/unfavorite button -->
+                    {% if is_favorite %}
+                    <form action="#" class="flex flex-col justify-center">
+                    <!-- route "/game_detail/remove_favorite_game/{{game.id}}" -->
+                        <input type="hidden" name="atlas_game_id" value="{{game.id}}">
+                        <input type="hidden" name="atlas_game_name" value="{{game.name}}">
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Unfavorite</button>
+                    </form>
+                    {% else %}
+                    <form action="" class="flex flex-col justify-center">
+                    <!-- route "/add_favorite_game/{{game.id}}" -->
+                        <input type="hidden" name="atlas_game_id" value="{{game.id}}">
+                        <input type="hidden" name="atlas_game_name" value="{{game.name}}">
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Favorite</button>
+                    </form>
+                    {% endif %}
+
+                    <!-- own/disown button -->
+                    {% if is_owned %}
+                    <form action="#" class="flex flex-col justify-center">
+                    <!-- route "/game_detail/remove_owned_game/{{game.id}}" -->
+                        <input type="hidden" name="atlas_game_id" value="{{game.id}}">
+                        <input type="hidden" name="atlas_game_name" value="{{game.name}}">
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed " type="submit">Don't Own</button>
+                    </form>
+                    {% else %}
+                    <form action="#" class="flex flex-col justify-center">
+                    <!-- route "/add_favorite_game/{{game.id}}" -->
+                        <input type="hidden" name="atlas_game_id" value="{{game.id}}">
+                        <input type="hidden" name="atlas_game_name" value="{{game.name}}">
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed " type="submit">Own</button>
+                    </form>
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!-- end of results table -->
+    </div>
+    <!-- end of search results -->
+    {% endblock %}
