@@ -6,6 +6,15 @@
 
             <h3 class="text-xl text-center font-bold">Login to Find Players!</h3>
 
+                <!-- error messages -->
+                <div class="text-red-600 font-semibold text-lg text-center">
+                    {% with login = get_flashed_messages(category_filter=['login']) %}
+                        {% if login %}
+                                <p>{{ login[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+
             <!-- username -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="user_email">
@@ -37,14 +46,4 @@
         </form>
     </div>
     <!-- end of form container -->
-
-    <!-- error messages -->
-    <div class="text-red-600">
-        {% with login = get_flashed_messages(category_filter=['login']) %}
-            {% if login %}
-                    <p>{{ login[0] }}</p>
-            {% endif %}
-        {% endwith %}
-    </div>
-
     {% endblock %}

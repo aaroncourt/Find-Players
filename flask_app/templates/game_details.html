@@ -4,9 +4,18 @@
     <div class="flex mt-5">
         <!-- details container -->
         <div class="flex flex-col justify-center bg-white/75 rounded relative">
-            
-            <h1 class="text-3xl text-center font-bold my-5">Game Details</h1>
+            <!-- error messages -->
+            <div class="text-red-600 text-xl font-bold text-center">
+                {% with denied = get_flashed_messages(category_filter=['denied']) %}
+                    {% if denied %}
+                            <p>{{ denied[0] }}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!-- end of error messages -->
 
+            <h1 class="text-3xl text-center font-bold my-5">Game Details</h1>
+            
             <img src="{{ game_info.image_url }}" alt="picture of {{ game_info.name }}" class="max-h-80 max-w-xs place-self-center ">
             
             <!-- actions container -->
