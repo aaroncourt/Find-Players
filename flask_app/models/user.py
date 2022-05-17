@@ -98,7 +98,7 @@ class User:
     @staticmethod
     def logged_in():
         is_valid = True
-        if session.get('user_id') == False:
+        if session.get('user_id') == None:
             flash('You must be logged in to acccess that page!', 'denied')
             is_valid = False
         return is_valid
@@ -160,7 +160,6 @@ class User:
 
         result = MySQLConnection('find_players').query_db(query, data)
 
-        print(result)
         return result
 
     @classmethod

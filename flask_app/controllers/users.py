@@ -45,11 +45,9 @@ def login_page():
 def login():
     if not User.validate_login(request.form):
         return redirect('/login')
-    print(request.form['user_email'])
     data = {'email': request.form['user_email']}
 
     user_in_db = User.get_by_email(data)
-    print(user_in_db)
 
     if not user_in_db:
         flash('Invalid Email/Password', 'login')
@@ -77,9 +75,10 @@ def dashboard():
     favorite_games = Game.get_favorite_games(data)
     owned_games = Game.get_owned_games(data)
 
-    print(favorite_users)
+    session_user_id = session['user_id']
+    
 
-    return render_template('player_dashboard.html', favorite_users = favorite_users, favorite_games = favorite_games, owned_games = owned_games)
+    return render_template('player_dashboard.html', favorite_users = favorite_users, favorite_games = favorite_games, owned_games = owned_games, session_user_id = session_user_id)
 
 @app.route('/add_favorite_user/<int:user_id>', methods=['POST'])
 def add_fav_user(user_id):
@@ -130,7 +129,6 @@ def player_info(user_id):
     is_favorite = User.is_favorite_user(favorite_search_data)
 
     user_info = User.get_user(data)
-    print(user_info)
 
     return render_template('player_details.html', user_info = user_info, is_favorite = is_favorite)
 
@@ -166,7 +164,6 @@ def submit_player_edits(user_id):
 
 @app.route('/player_search', methods = ['POST'])
 def player_zip_search():
-    print(session['user_id'])
     if not User.logged_in():
         return redirect('/home')
 
@@ -181,13 +178,12 @@ def player_results(search_term):
     data = {
         'zip_code' : search_term
     }
-    
+
     search_results = User.search_by_zip(data)
 
     return render_template('player_results.html', search_results = search_results, search_term = search_term)
 
-    
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-    session.clear()
+    session.pop('user_id', None)
     return redirect('/home')

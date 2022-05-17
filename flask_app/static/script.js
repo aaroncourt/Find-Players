@@ -1,12 +1,14 @@
 function showSearch(ele){
-    console.log(ele)
     const searchDiv = document.getElementById(ele).classList;
-    searchDiv.remove('hidden')
-    searchDiv.add('flex')
+    const test = document.getElementById(ele)
+    console.log(test)
+    searchDiv.remove('hidden');
+    searchDiv.add('flex');
 }
 
 function hideSearch(ele){
     const searchDiv = document.getElementById(ele).classList;
-    searchDiv.remove('flex')
-    searchDiv.add('hidden')
+    searchDiv.remove('flex');
+    searchDiv.add('hidden');
+    console.log(searchDiv)
 }

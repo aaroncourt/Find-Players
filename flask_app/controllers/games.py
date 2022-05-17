@@ -5,6 +5,9 @@ from flask_app.models.game import Game
 
 @app.route('/home')
 def home():
+    if not session.get('user_id'):
+        session['user_id'] = None
+        
     data = {
         'atlas_game_id' : 'F1aw7kyGTA'
     }
@@ -34,7 +37,6 @@ def get_game(game_id):
 @app.route('/add_favorite_game/<atlas_game_id>', methods = ['POST'])
 def add_fav_game(atlas_game_id):
 
-    print(request.form)
     data = {
         'user_id' : session['user_id'],
         'atlas_game_id' : request.form['atlas_game_id'],

@@ -12,36 +12,14 @@
             <tr class="border-b-2 border-green-600">
                 <th>Name</th>
                 <th>Favorite Game</th>
-                <th>Actions</th>
             </tr>
             {% for player in search_results %}
-            <tr class="border-b-2 border-green-600 align-middle font-semibold" >
+            <tr class="border-b-2 border-green-600 align-middle font-semibold cursor-pointer" onclick="location.href='/player/{{player.id}}'">
                 <!-- player name -->
-                <td class="cursor-pointer text-center m-2 underline" onclick="location.href='/player/{{player.id}}'">{{ player.nickname }}</td>
+                <td class="text-center m-2 underline" >{{ player.nickname }}</td>
 
                 <!-- player favorite games -->
-                <td class="line-clamp-4 text-justify w-auto md:w-fit px-5 pt-7">{{ player.favorite_game }}</td>
-                
-                <!-- player actions -->
-                <td class="space-y-3 py-5">
-
-                    <!-- favorite/unfavorite button -->
-                    {% if is_favorite %}
-                    <form action="#" class="flex flex-col justify-center">
-                        <!-- "/results/{{search_term}}/add_favorite_user/{{player.id}}" -->
-                        <input type="hidden" name="user_id" value="{{player.id}}">
-                        <input type="hidden" name="player_name" value="{{player.name}}">
-                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Unfavorite</button>
-                    </form>
-                    {% else %}
-                    <form action="" class="flex flex-col justify-center">
-                        <!-- "/add_favorite_user/{{player.id}}" -->
-                        <input type="hidden" name="user_id" value="{{player.id}}">
-                        <input type="hidden" name="player_name" value="{{player.name}}">
-                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Favorite</button>
-                    </form>
-                    {% endif %}
-                </td>
+                <td class="line-clamp-4 text-justify w-auto md:w-fit px-5 py-3">{{ player.favorite_game }}</td>
             </tr>
             {% endfor %}
         </table>

@@ -12,8 +12,6 @@ class Game:
 
     @classmethod
     def get_game_info(cls, data):
-        print(f'https://api.boardgameatlas.com/api/search?ids={data["atlas_game_id"]}&client_id={os.environ.get("boardgame_atlas_api")}')
-
         results = requests.get(f'https://api.boardgameatlas.com/api/search?ids={data["atlas_game_id"]}&client_id={os.environ.get("boardgame_atlas_api")}')
 
         return results.json()

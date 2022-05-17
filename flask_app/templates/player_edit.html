@@ -82,7 +82,7 @@
     </div>
 
     <!-- error messages conttainer -->
-    <div class="text-red-600 text-center">
+    <div class="text-red-600 text-center font-semibold text-lg">
         {% with messages = get_flashed_messages(category_filter=["registration", "update"]) %}
         {% if messages %}
             {% for message in messages %}
