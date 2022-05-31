@@ -1,4 +1,4 @@
-from config.mysqlconnection import MySQLConnection
+from flask_app.config.mysqlconnection import MySQLConnection
 import requests
 import os
 import json
