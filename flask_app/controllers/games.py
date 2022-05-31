@@ -1,8 +1,7 @@
 from flask import redirect, render_template, request, session, flash
 from flask_app import app
-from config.mysqlconnection import MySQLConnection
-from models.game import Game
-from models.user import User
+from flask_app.config.mysqlconnection import MySQLConnection
+from flask_app.models.game import Game
 
 @app.route('/home')
 def home():
@@ -37,8 +36,6 @@ def get_game(game_id):
 
 @app.route('/add_favorite_game/<atlas_game_id>', methods = ['POST'])
 def add_fav_game(atlas_game_id):
-    if not User.logged_in():
-        return redirect(f'/game/{atlas_game_id}')
 
     data = {
         'user_id' : session['user_id'],
@@ -52,9 +49,6 @@ def add_fav_game(atlas_game_id):
 
 @app.route('/game_detail/remove_favorite_game/<atlas_game_id>', methods = ['POST'])
 def game_details_remove_fav_game(atlas_game_id):
-    if not User.logged_in():
-        return redirect(f'/game/{atlas_game_id}')
-
     data = {
         'user_id' : session['user_id'],
         'atlas_game_id' : request.form['atlas_game_id'],
@@ -79,9 +73,6 @@ def dashboard_remove_fav_game(atlas_game_id):
 
 @app.route('/add_owned_game/<atlas_game_id>', methods = ['POST'])
 def add_game_owned(atlas_game_id):
-    if not User.logged_in():
-        return redirect(f'/game/{atlas_game_id}')
-
     data = {
         'user_id' : session['user_id'],
         'atlas_game_id' : request.form['atlas_game_id'],
@@ -94,9 +85,6 @@ def add_game_owned(atlas_game_id):
 
 @app.route('/game_detail/remove_owned_game/<atlas_game_id>', methods = ['POST'])
 def game_detail_remove_owned(atlas_game_id):
-    if not User.logged_in():
-        return redirect(f'/game/{atlas_game_id}')
-        
     data = {
         'user_id' : session['user_id'],
         'atlas_game_id' : request.form['atlas_game_id'],

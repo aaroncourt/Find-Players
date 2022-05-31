@@ -99,7 +99,7 @@ class User:
     def logged_in():
         is_valid = True
         if session.get('user_id') == None:
-            flash('You must be logged in to complete that action!', 'denied')
+            flash('You must be logged in to acccess that page!', 'denied')
             is_valid = False
         return is_valid
 
