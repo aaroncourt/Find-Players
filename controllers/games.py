@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, session, flash
 from flask_app import app
-from flask_app.config.mysqlconnection import MySQLConnection
-from flask_app.models.game import Game
-from flask_app.models.user import User
+from config.mysqlconnection import MySQLConnection
+from models.game import Game
+from models.user import User
 
 @app.route('/home')
 def home():
