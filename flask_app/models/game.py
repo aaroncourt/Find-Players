@@ -12,7 +12,7 @@ class Game:
 
     @classmethod
     def get_game_info(cls, data):
-        results = requests.get(f'https://api.boardgameatlas.com/api/search?ids={data["atlas_game_id"]}&client_id={os.environ.get("boardgame_atlas_api")}')
+        results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id={os.environ.get("boardgame_atlas_api")}&ids={data["atlas_game_id"]}')
         results_json = results.json()
         game_info = results_json["games"][0]
         
@@ -20,7 +20,7 @@ class Game:
 
     @classmethod
     def get_random_game(cls):
-        results = requests.get(f'https://api.boardgameatlas.com/api/search?random=true&client_id={os.environ.get("boardgame_atlas_api")}')
+        results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id={os.environ.get("boardgame_atlas_api")}&random=true')
         results_json = results.json()
         game_info = results_json["games"][0]
 
