@@ -34,7 +34,7 @@ class Game:
 
     @classmethod
     def search_for_games(cls, data):
-        results = requests.get(f'https://api.boardgameatlas.com/api/search?name={data["search_term"]}&limit=3&client_id={os.environ.get("boardgame_atlas_api")}')
+        results = requests.get(f'https://api.boardgameatlas.com/api/search?name={data["search_term"]}&limit=3&client_id=AWoH1mhoWo')
         
         results = results.json()
         results = results['games']
