@@ -14,14 +14,17 @@ def home():
     data = {
         'atlas_game_id' : 'F1aw7kyGTA'
     }
-    featured = Game.get_game_info(data)
-    logging.debug(featured)
-    featured = featured['games'][0]
+    # featured = Game.get_game_info(data)
+    # logging.debug(featured)
+    # featured = featured['games'][0]
 
-    random = Game.get_random_game()
-    random = random['games'][0]
+    # random = Game.get_random_game()
+    # random = random['games'][0]
 
-    return render_template('index.html', featured = featured, random = random)
+    return render_template('index.html', 
+    # featured = featured, 
+    # random = random
+    )
 
 @app.route('/game/<game_id>')
 def get_game(game_id):
