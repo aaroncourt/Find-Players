@@ -16,7 +16,7 @@ class Game:
     @classmethod
     def get_game_info(cls, data):
         logging.debug("next is from environ")
-        logging.debug({os.environ("boardgame_atlas_api")})
+        logging.debug({os.environ["boardgame_atlas_api"]})
         results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id=AWoH1mhoWo&ids={data["atlas_game_id"]}')
         results_json = results.json()
         logging.debug(results_json)
