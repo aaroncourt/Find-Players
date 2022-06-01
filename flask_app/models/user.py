@@ -106,7 +106,7 @@ class User:
 
     @classmethod
     def add_user(cls, data):
-        results = requests.get(f'https://www.zipcodeapi.com/rest/{os.environ.get("zip_code_api")}/info.json/{data["zip_code"]}/degrees')
+        results = requests.get(f'https://www.zipcodeapi.com/rest/v5hqMECYHXO5GxC9WXxOlVLsaTHIw5CuSS7XMBJd0IALZeM2rGOlm7CwPNc1Fddo/info.json/{data["zip_code"]}/degrees')
                 
         city_results = results.json()
         data['city'] = city_results['city']
@@ -170,7 +170,7 @@ class User:
 
     @classmethod
     def search_by_zip(cls, data):
-        results = requests.get(f'https://www.zipcodeapi.com/rest/{os.environ.get("zip_code_api")}/radius.json/{data["zip_code"]}/10/mile')
+        results = requests.get(f'https://www.zipcodeapi.com/rest/v5hqMECYHXO5GxC9WXxOlVLsaTHIw5CuSS7XMBJd0IALZeM2rGOlm7CwPNc1Fddo/radius.json/{data["zip_code"]}/10/mile')
 
         zip_results = results.json()
         zip_results = zip_results['zip_codes']
@@ -247,7 +247,7 @@ class User:
         if is_valid == False:
             return is_valid
 
-        results = requests.get(f'https://www.zipcodeapi.com/rest/{os.environ.get("zip_code_api")}/info.json/{response["zip_code"]}/degrees')
+        results = requests.get(f'https://www.zipcodeapi.com/rest/v5hqMECYHXO5GxC9WXxOlVLsaTHIw5CuSS7XMBJd0IALZeM2rGOlm7CwPNc1Fddo/info.json/{response["zip_code"]}/degrees')
         
         city_results = results.json()
         response['city'] = city_results['city']
