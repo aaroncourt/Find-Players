@@ -13,14 +13,18 @@ class Game:
     @classmethod
     def get_game_info(cls, data):
         results = requests.get(f'https://api.boardgameatlas.com/api/search?ids={data["atlas_game_id"]}&client_id={os.environ.get("boardgame_atlas_api")}')
+        results_json = results.json()
+        game_info = results_json['games'][0]
         
-        return results.json()
+        return game_info
 
     @classmethod
     def get_random_game(cls):
         results = requests.get(f'https://api.boardgameatlas.com/api/search?random=true&client_id={os.environ.get("boardgame_atlas_api")}')
+        results_json = results.json()
+        game_info = results_json['games'][0]
 
-        return results.json()
+        return game_info
 
     @classmethod
     def search_for_games(cls, data):
