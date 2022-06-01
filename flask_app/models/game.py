@@ -4,6 +4,13 @@ import os
 import json
 from flask_app import app
 from flask import flash, request, jsonify
+import logging
+from systemd.journal import JournalHandler
+
+log = logging.getLogger('demo')
+log.addHandler(JournalHandler())
+log.setLevel(logging.INFO)
+log.info("sent to journal")
 
 class Game:
     def __init__(self, db_data):
@@ -12,9 +19,9 @@ class Game:
 
     @classmethod
     def get_game_info(cls, data):
-        print(data)
         results = requests.get(f'https://api.boardgameatlas.com/api/search?ids={data["atlas_game_id"]}&client_id={os.environ.get("boardgame_atlas_api")}')
-
+        log.debug(results)
+        
         return results.json()
 
     @classmethod

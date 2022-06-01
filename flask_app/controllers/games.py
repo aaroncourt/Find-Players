@@ -2,6 +2,13 @@ from flask import redirect, render_template, request, session, flash
 from flask_app import app
 from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app.models.game import Game
+import logging
+from systemd.journal import JournalHandler
+
+log = logging.getLogger('demo')
+log.addHandler(JournalHandler())
+log.setLevel(logging.INFO)
+log.info("sent to journal")
 
 @app.route('/home')
 def home():
@@ -12,8 +19,7 @@ def home():
         'atlas_game_id' : 'F1aw7kyGTA'
     }
     featured = Game.get_game_info(data)
-    print('Line 15 Games')
-    print(featured)
+    log.debug(featured)
     featured = featured['games'][0]
 
     random = Game.get_random_game()
