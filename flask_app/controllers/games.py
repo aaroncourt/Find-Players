@@ -2,9 +2,6 @@ from flask import redirect, render_template, request, session, flash
 from flask_app import app
 from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app.models.game import Game
-import logging
-
-logging.basicConfig(filename='python_errors.log', encoding='utf-8', level=logging.DEBUG)
 
 @app.route('/home')
 def home():
