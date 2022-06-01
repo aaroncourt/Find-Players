@@ -12,16 +12,25 @@ def home():
         'atlas_game_id' : 'F1aw7kyGTA'
     }
     # featured = Game.get_game_info(data)
-    # logging.debug(featured)
     # featured = featured['games'][0]
 
     # random = Game.get_random_game()
     # random = random['games'][0]
+    featured = {
+        'id': 'F1aw7kyGTA',
+        'image_url': 'https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254186139-51cXhVYYHwL.jpg',
+        "name": "Bohnanza",
+        "description_preview": " This great card game is about planting, trading, and selling beans - 11 kinds of beans (this English version includes all the cards from the original game and the first expansion).   Players try to collect large sets of beans to sell for gold. There is limited growing space and always new beans to plant. To avoid planting unwanted beans, players trade them to other players who want them for their bean fields. "
+    }
 
-    return render_template('index.html', 
-    # featured = featured, 
-    # random = random
-    )
+    random = {
+        'id': 'F1aw7kyGTA',
+        'image_url': 'https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254186139-51cXhVYYHwL.jpg',
+        "name": "Bohnanza",
+        "description_preview": " This great card game is about planting, trading, and selling beans - 11 kinds of beans (this English version includes all the cards from the original game and the first expansion).   Players try to collect large sets of beans to sell for gold. There is limited growing space and always new beans to plant. To avoid planting unwanted beans, players trade them to other players who want them for their bean fields. "
+    }
+
+    return render_template('index.html', featured = featured, random = random)
 
 @app.route('/game/<game_id>')
 def get_game(game_id):
