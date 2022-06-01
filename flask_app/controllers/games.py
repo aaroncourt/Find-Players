@@ -3,10 +3,8 @@ from flask_app import app
 from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app.models.game import Game
 import logging
-from systemd import JournalHandler
 
 log = logging.getLogger('demo')
-log.addHandler(JournalHandler())
 log.setLevel(logging.INFO)
 log.info("sent to journal")
 

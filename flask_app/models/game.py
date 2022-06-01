@@ -5,10 +5,8 @@ import json
 from flask_app import app
 from flask import flash, request, jsonify
 import logging
-from systemd import JournalHandler
 
 log = logging.getLogger('demo')
-log.addHandler(JournalHandler())
 log.setLevel(logging.INFO)
 log.info("sent to journal")
 
