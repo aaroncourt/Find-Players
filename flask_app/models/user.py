@@ -3,7 +3,7 @@ from flask_app import app
 from flask import flash, session
 import re
 import requests
-import os
+import logging
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
@@ -129,8 +129,9 @@ class User:
     def get_by_email(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         result = MySQLConnection('find_players').query_db(query, data)
+        logging.debug(result)
 
-        if len(result) < 1:
+        if result == False:
             return False
 
         return cls(result[0])
