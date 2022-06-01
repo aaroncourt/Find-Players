@@ -4,6 +4,9 @@ import os
 import json
 from flask_app import app
 from flask import flash, request, jsonify
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 class Game:
     def __init__(self, db_data):
@@ -14,7 +17,9 @@ class Game:
     def get_game_info(cls, data):
         results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id={os.environ.get("boardgame_atlas_api")}&ids={data["atlas_game_id"]}')
         results_json = results.json()
+        logging.debug('This is the results json: ' + results_json)
         game_info = results_json["games"][0]
+        logging.debug('This is the game info: ' + game_info)
         
         return game_info
 
