@@ -4,9 +4,7 @@ from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app.models.game import Game
 import logging
 
-log = logging.getLogger('demo')
-log.setLevel(logging.INFO)
-log.info("sent to journal")
+logging.basicConfig(filename='python_errors.log', encoding='utf-8', level=logging.DEBUG)
 
 @app.route('/home')
 def home():
@@ -17,7 +15,7 @@ def home():
         'atlas_game_id' : 'F1aw7kyGTA'
     }
     featured = Game.get_game_info(data)
-    log.debug(featured)
+    logging.debug(featured)
     featured = featured['games'][0]
 
     random = Game.get_random_game()
