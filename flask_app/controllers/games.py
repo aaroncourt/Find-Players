@@ -3,7 +3,7 @@ from flask_app import app
 from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app.models.game import Game
 import logging
-from systemd.journal import JournalHandler
+from systemd import JournalHandler
 
 log = logging.getLogger('demo')
 log.addHandler(JournalHandler())
