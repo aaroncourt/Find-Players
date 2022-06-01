@@ -15,7 +15,7 @@ class Game:
 
     @classmethod
     def get_game_info(cls, data):
-        logging.debug({os.environ.get("boardgame_atlas_api")})
+        logging.debug('this is from environ: ' + {os.environ.get("boardgame_atlas_api")})
         results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id=AWoH1mhoWo&ids={data["atlas_game_id"]}')
         results_json = results.json()
         logging.debug(results_json)
@@ -26,7 +26,7 @@ class Game:
 
     @classmethod
     def get_random_game(cls):
-        results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id={os.environ.get("boardgame_atlas_api")}&random=true')
+        results = requests.get(f'https://api.boardgameatlas.com/api/search?client_id=AWoH1mhoWo&random=true')
         results_json = results.json()
         game_info = results_json["games"][0]
 
