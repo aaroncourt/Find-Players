@@ -12,6 +12,8 @@ def home():
         'atlas_game_id' : 'F1aw7kyGTA'
     }
     featured = Game.get_game_info(data)
+    print('Line 15 Games')
+    print(featured)
     featured = featured['games'][0]
 
     random = Game.get_random_game()
