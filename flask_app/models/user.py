@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from flask_app.config.mysqlconnection import MySQLConnection
 from flask_app import app
 from flask import flash, session
@@ -129,9 +130,11 @@ class User:
     def get_by_email(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         result = MySQLConnection('find_players').query_db(query, data)
-        logging.debug(result)
+        
+        print(f'This is the get by email result: {result}')
+        print(len(result))
 
-        if result == False:
+        if len(result) < 1:
             return False
 
         return cls(result[0])

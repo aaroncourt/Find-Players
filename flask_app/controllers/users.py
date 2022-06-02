@@ -43,8 +43,6 @@ def login_page():
 
 @app.route('/login', methods = ['POST'])
 def login():
-    if not User.validate_login(request.form):
-        return redirect('/login')
     data = {'email': request.form['user_email']}
 
     user_in_db = User.get_by_email(data)
