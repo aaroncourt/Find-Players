@@ -14,7 +14,7 @@ class Game:
 
     @classmethod
     def get_game_info(cls, data):
-        boardgame_atlas = os.environ['boardgame_atlas_api']
+        boardgame_atlas = os.environ.get("boardgame_atlas_api")
         logging.debug("This is from os.environ[key]:" + boardgame_atlas)
         logging.debug("next is from environ")
         logging.debug({os.environ.get("boardgame_atlas_api")})
