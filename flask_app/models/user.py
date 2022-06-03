@@ -130,10 +130,9 @@ class User:
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         result = MySQLConnection('find_players').query_db(query, data)
         
-        print(f'This is the get by email result: {result}')
-        print(len(result))
+        logging.debug(f'This is the get by email result: {result}')
 
-        if len(result) < 1:
+        if not result:
             return False
 
         return cls(result[0])
