@@ -1,5 +1,6 @@
-# Individual-Capstone-Project
-This was my individual capstone project at Coding Dojo. I used Python, Flask, and MySQL to make a website for board game players. The website allows users to search for each other and search for board games. The player search results are provided by a ZIP Code radius search using a ZIP Code API and the results are then queried against the database to select users with those ZIP Codes and then display them. The boardgame results are retreived from a different API provided by Board Game Atlas. The website also allows users to favorite other users, favorite games, and mark games that you own. The site features user registration and login. There are future developments planned. The site is deployed on AWS and is available here: (http://54.215.204.51/home)
+# Individual-Capstone-Project aka Find Players
+This was my individual capstone project at Coding Dojo. I used Python, Flask, and MySQL to make a website for board game players. The website allows users to search for each other and search for board games. The player search results are provided by a ZIP Code radius search using a ZIP Code API and the results are then queried against the database to select users with those ZIP Codes and then display them. The boardgame results are retreived from a different API provided by Board Game Atlas. The website also allows users to favorite other users, favorite games, and mark games that you own. The site features user registration and login. There are future developments planned. The site is deployed on AWS and is available here: http://54.215.204.51/home
+
 
 ### Backlog Items:
 1. Ability for users to change their passwords
@@ -13,4 +14,5 @@ This was my individual capstone project at Coding Dojo. I used Python, Flask, an
 8. Add avatars for players to choose from
 9. Add a no search results page
 10. Create repository and api call class 
+11. Register a domain or subdomain name for the site.
 
